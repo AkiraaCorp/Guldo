@@ -1,3 +1,4 @@
+![tumblr_inline_pq138vKa7y1r15usg_1280](https://github.com/user-attachments/assets/2ca43911-585a-47ad-9187-95ec577c060c)
 
 Guldo is a Go-based application that connects to a blockchain and a PostgreSQL database to fetch and store event probabilities. It utilizes several packages for database interaction, blockchain communication, and utility functions.
 
