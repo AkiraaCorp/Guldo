@@ -12,7 +12,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-type BlockchainClient struct {
+type Client struct {
 	Client *rpc.Provider
 }
 
@@ -20,7 +20,7 @@ var (
 	getOddsFunctionName = "get_event_probability"
 )
 
-func NewBlockchainClient() (*BlockchainClient, error) {
+func NewBlockchainClient() (*Client, error) {
 	err := godotenv.Load()
 	if err != nil {
 		fmt.Println("Error loading .env file")
@@ -39,10 +39,10 @@ func NewBlockchainClient() (*BlockchainClient, error) {
 	}
 
 	fmt.Println("Blockchain client created successfully")
-	return &BlockchainClient{Client: client}, nil
+	return &Client{Client: client}, nil
 }
 
-func (bc *BlockchainClient) Call(contractAddress string, functionName string) ([]*felt.Felt, error) {
+func (bc *Client) Call(contractAddress string, functionName string) ([]*felt.Felt, error) {
 	address, err := utils.HexToFelt(contractAddress)
 	if err != nil {
 		fmt.Printf("Error converting address to felt: %v", err)
@@ -66,7 +66,7 @@ func (bc *BlockchainClient) Call(contractAddress string, functionName string) ([
 	return response, nil
 }
 
-func (bc *BlockchainClient) GetEventProbability(contractAddress string) (models.OddsHistory, error) {
+func (bc *Client) GetEventProbability(contractAddress string) (models.OddsHistory, error) {
 
 	response, err := bc.Call(contractAddress, getOddsFunctionName)
 	if err != nil {
