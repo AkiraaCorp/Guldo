@@ -3,15 +3,16 @@ module guldo
 go 1.23.0
 
 require (
+	github.com/NethermindEth/juno v0.3.1
 	github.com/NethermindEth/starknet.go v0.7.1
 	github.com/joho/godotenv v1.4.0
+	github.com/robfig/cron/v3 v3.0.1
 	gorm.io/driver/postgres v1.5.9
 	gorm.io/gorm v1.25.12
 )
 
 require (
 	github.com/Microsoft/go-winio v0.6.1 // indirect
-	github.com/NethermindEth/juno v0.3.1 // indirect
 	github.com/StackExchange/wmi v1.2.1 // indirect
 	github.com/bits-and-blooms/bitset v1.10.0 // indirect
 	github.com/consensys/gnark-crypto v0.12.1 // indirect
