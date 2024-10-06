@@ -21,6 +21,7 @@ jobs:
       - name: Deploy
         run: |
           ssh -o StrictHostKeyChecking=no -p $VPS_SSH_PORT $VPS_USER@$VPS_HOST "
+          
             if [ ! -d '/home/ubuntu/guldo' ]; then
               GIT_SSH_COMMAND='ssh -i /root/.ssh/guldo/guldo-deploy' git clone git@github.com:AkiraaCorp/Guldo.git /home/ubuntu/guldo
             else
@@ -29,13 +30,13 @@ jobs:
             cd /home/ubuntu/guldo
 
             cat > .env <<EOL
-            GO_ENV="development"
-            DB_HOST="localhost"
-            DB_PORT="5432"
-            DB_USER="postgres"
+            GO_ENV=\"development\"
+            DB_HOST=\"localhost\"
+            DB_PORT=\"5432\"
+            DB_USER=\"postgres\"
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-            DB_NAME="sightbet"
-            EOL
+            DB_NAME=\"sightbet\"
+EOL
 
             pm2 stop guldo-cron || true
             go build -o guldo && pm2 start ./guldo --name guldo-cron
