@@ -36,6 +36,7 @@ jobs:
           DB_USER="postgres"
           DB_PASSWORD='${{ secrets.DB_PASSWORD }}'
           DB_NAME="sightbet"
+          RPC_URL=https://starknet-sepolia.blastapi.io/05d8c1e9-70d6-41e4-a849-d2dff1e62b3b/
           EOL
 
             pm2 describe guldo-cron > /dev/null && pm2 stop guldo-cron || echo 'Process not running'
