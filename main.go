@@ -6,12 +6,34 @@ import (
 	"guldo/db"
 	"guldo/repository"
 	"guldo/utils"
+	"log"
+	"os"
 
+	"github.com/joho/godotenv"
 	"github.com/robfig/cron/v3"
 )
 
 func init() {
 	utils.PrintBanner()
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+	}
+
+	// Retrieve database connection information from environment variables
+	host := os.Getenv("DB_HOST")
+	port := os.Getenv("DB_PORT")
+	user := os.Getenv("DB_USER")
+	password := os.Getenv("DB_PASSWORD")
+	dbname := os.Getenv("DB_NAME")
+	sslmode := os.Getenv("DB_SSLMODE")
+
+	fmt.Println("DB_HOST:", host)
+	fmt.Println("DB_PORT:", port)
+	fmt.Println("DB_USER:", user)
+	fmt.Println("DB_PASSWORD:", password)
+	fmt.Println("DB_NAME:", dbname)
+	fmt.Println("DB_SSLMODE:", sslmode)
 }
 
 func main() {
