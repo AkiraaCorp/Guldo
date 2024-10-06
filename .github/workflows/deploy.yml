@@ -36,7 +36,7 @@ jobs:
             DB_USER=\"postgres\"
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             DB_NAME=\"sightbet\"
-EOL
+            EOL
 
             pm2 stop guldo-cron || true
             go build -o guldo && pm2 start ./guldo --name guldo-cron
