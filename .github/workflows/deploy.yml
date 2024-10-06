@@ -1,0 +1,49 @@
+name: Deploy Guldo to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install SSH key
+        uses: webfactory/ssh-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+      - name: Deploy
+        run: |
+          ssh -o StrictHostKeyChecking=no -p ${{ secrets.VPS_SSH_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} "
+          if [ ! -d '/home/ubuntu/guldo' ]; then
+            git clone git@github.com:AkiraaCorp/guldo.git /home/ubuntu/guldo
+          else
+            cd /home/ubuntu/guldo && git pull origin main
+          fi
+          "
+
+          pm2 stop guldo-cron
+
+          cat > .env <<EOL
+          GO_ENV="development"
+          DB_HOST="localhost"
+          DB_PORT="5432"
+          DB_USER="postgres"
+          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+          DB_NAME="sightbet"
+          EOL
+
+          go build -o guldo main.go
+          pm2 start ./guldo --name guldo-cron
+      env:
+        VPS_HOST: ${{ secrets.VPS_IP }}
+        VPS_USER: ${{ secrets.VPS_USERNAME }}
+        VPS_SSH_PORT: ${{ secrets.VPS_SSH_PORT }}
+
