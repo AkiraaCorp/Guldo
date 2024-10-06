@@ -39,7 +39,6 @@ jobs:
           EOL
 
             pm2 describe guldo-cron > /dev/null && pm2 stop guldo-cron || echo 'Process not running'
-            ls
             go build -o guldo && pm2 start ./guldo --name guldo-cron
           "
         env:
