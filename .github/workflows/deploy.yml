@@ -38,6 +38,5 @@ jobs:
             DB_NAME="sightbet"
             EOL
             pm2 stop guldo-cron || true
-            go build -o guldo main.go
-            pm2 start ./guldo --name guldo-cron
+            go build -o guldo main.go && pm2 start ./guldo --name guldo-cron
           "
