@@ -26,10 +26,9 @@ jobs:
           ssh -t -o StrictHostKeyChecking=no -p $VPS_SSH_PORT $VPS_USER@$VPS_HOST << 'EOF'
             if [ ! -d '/home/ubuntu/guldo' ]; then
               git clone git@github.com:AkiraaCorp/guldo.git /home/ubuntu/guldo
+            else
+              cd /home/ubuntu/guldo && git pull origin main
             fi
-            cd /home/ubuntu/guldo
-            git pull origin main
-            pm2 stop guldo-cron || true
             cat > .env <<EOL
             GO_ENV="development"
             DB_HOST="localhost"
