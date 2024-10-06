@@ -30,14 +30,16 @@ jobs:
               cd /home/ubuntu/guldo && GIT_SSH_COMMAND='ssh -i /root/.ssh/guldo/guldo-deploy' git pull origin main
             fi
             cd /home/ubuntu/guldo
+
             cat > .env <<EOL
             GO_ENV="development"
             DB_HOST="localhost"
             DB_PORT="5432"
             DB_USER="postgres"
-            DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             DB_NAME="sightbet"
             EOL
+
             pm2 stop guldo-cron || true
             go build -o guldo main.go && pm2 start ./guldo --name guldo-cron
           "
