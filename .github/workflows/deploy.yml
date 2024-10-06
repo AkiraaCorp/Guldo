@@ -30,13 +30,13 @@ jobs:
             cd /home/ubuntu/guldo
 
             cat > .env <<EOL
-            GO_ENV=\"development\"
-            DB_HOST=\"localhost\"
-            DB_PORT=\"5432\"
-            DB_USER=\"postgres\"
-            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-            DB_NAME=\"sightbet\"
-            EOL
+          GO_ENV=\"development\"
+          DB_HOST=\"localhost\"
+          DB_PORT=\"5432\"
+          DB_USER=\"postgres\"
+          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+          DB_NAME=\"sightbet\"
+          EOL
 
             pm2 stop guldo-cron || true
             go build -o guldo && pm2 start ./guldo --name guldo-cron
