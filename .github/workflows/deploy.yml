@@ -29,6 +29,7 @@ jobs:
             else
               cd /home/ubuntu/guldo && GIT_SSH_COMMAND='ssh -i /root/.ssh/guldo/guldo-deploy' git pull origin main
             fi
+            cd /home/ubuntu/guldo
             cat > .env <<EOL
             GO_ENV="development"
             DB_HOST="localhost"
