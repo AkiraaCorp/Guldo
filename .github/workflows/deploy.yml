@@ -19,11 +19,11 @@ jobs:
       - name: Install SSH key
         uses: webfactory/ssh-agent@v0.5.1
         with:
-          ssh-private-key: ${{ secrets.SSH_KEY }}
+          ssh-private-key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
 
       - name: Deploy
         run: |
-          ssh -o StrictHostKeyChecking=no -p $VPS_SSH_PORT $VPS_USER@$VPS_HOST << 'EOF'
+          ssh -o StrictHostKeyChecking=no -p $VPS_SSH_PORT $VPS_USER@$VPS_IP << 'EOF'
             if [ ! -d '/home/ubuntu/guldo' ]; then
               git clone git@github.com:AkiraaCorp/guldo.git /home/ubuntu/guldo
             else
