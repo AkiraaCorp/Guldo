@@ -34,7 +34,7 @@ jobs:
           DB_HOST="localhost"
           DB_PORT="5432"
           DB_USER="postgres"
-          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+          DB_PASSWORD='${{ secrets.DB_PASSWORD }}'
           DB_NAME="sightbet"
           EOL
 
