@@ -85,8 +85,8 @@ func (bc *Client) GetEventProbability(contractAddress string) (models.OddsHistor
 	}
 
 	odd := models.OddsHistory{
-		OddsYes:      value[0],
-		OddsNo:       value[1],
+		OddsYes:      value[1],
+		OddsNo:       value[0],
 		EventAddress: contractAddress,
 	}
 
