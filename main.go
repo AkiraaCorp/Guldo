@@ -38,7 +38,7 @@ func init() {
 
 func main() {
 	c := cron.New()
-	c.AddFunc("@every 1h", func() {
+	c.AddFunc("@every 1m", func() {
 		runJob()
 	})
 	c.Start()
